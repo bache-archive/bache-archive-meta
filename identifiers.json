@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "_comment": "Central registry for cross-platform identifiers. Extend as needed (ORCID, OpenAlex, VIAF, DOIs, ISBNs, ROR).",
+  "entities": {
+    "christopher_m_bache": {
+      "wikidata": "Q112496741",
+      "orcid": "",
+      "openalex": "",
+      "viaf": ""
+    },
+    "lsdmu": {
+      "wikidata": "Q136684740",
+      "isbn_10": "",
+      "isbn_13": ""
+    },
+    "dark_night_early_dawn": {
+      "wikidata": "Q136684765",
+      "isbn_10": "",
+      "isbn_13": ""
+    },
+    "living_classroom": {
+      "wikidata": "Q136684793",
+      "isbn_10": "",
+      "isbn_13": ""
+    },
+    "lifecycles": {
+      "wikidata": "Q136684807",
+      "isbn_10": "",
+      "isbn_13": ""
+    }
+  }
+}

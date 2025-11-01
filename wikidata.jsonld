@@ -1,0 +1,10 @@
+{
+  "@context": { "wd": "https://www.wikidata.org/entity/" },
+  "entities": {
+    "christopher_m_bache": "wd:Q112496741",
+    "lsdmu": "wd:Q136684740",
+    "dark_night_early_dawn": "wd:Q136684765",
+    "living_classroom": "wd:Q136684793",
+    "lifecycles": "wd:Q136684807"
+  }
+}

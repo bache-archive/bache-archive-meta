@@ -1,0 +1,28 @@
+# YAML front-matter schema (informal) for bache-educational-docs
+# Enforce via CI using yq/jq checks or a JSON Schema wrapper if desired.
+required:
+  - title
+  - id
+  - date
+  - version
+  - source_policy
+  - project
+  - document_type
+  - wikidata_author
+properties:
+  title: { type: string }
+  id: { type: string }
+  date: { type: string, pattern: '^\d{4}-\d{2}-\d{2}$' }
+  version: { type: string }
+  source_policy: { type: string }
+  status: { type: string }
+  editor: { type: string }
+  created_by: { type: string }
+  maintained_by: { type: string }
+  project: { type: string }
+  collection: { type: string }
+  document_type: { type: string, enum: [topic-summary, guide, syllabus] }
+  wikidata_author: { type: string, pattern: '^Q\\d+$' }
+  related_works:
+    type: array
+    items: { type: string, pattern: '^Q\\d+$' }

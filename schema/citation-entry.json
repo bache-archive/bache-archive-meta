@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bache-archive.org/schema/citation-entry.json",
+  "title": "CSL-JSON with Bache Extensions",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string" },
+    "type": { "type": "string" },
+    "title": { "type": "string" },
+    "author": { "type": "array", "items": { "type": "object" } },
+    "issued": { "type": "object" },
+    "publisher": { "type": "string" },
+    "x-bache": {
+      "type": "object",
+      "properties": {
+        "work_wikidata_qid": { "type": "string", "pattern": "^Q\\d+$" },
+        "author_wikidata_qid": { "type": "string", "pattern": "^Q\\d+$" }
+      },
+      "additionalProperties": true
+    }
+  },
+  "required": ["type", "title"]
+}
