@@ -1,25 +1,64 @@
-name: Validate Identifiers
+name: Validate identifiers & schemas
 
 on:
   push:
+    branches: [ main ]
+    paths:
+      - identifiers.json
+      - wikidata.jsonld
+      - schema/**
+      - tools/**
+      - .github/workflows/validate_identifiers.yml
   pull_request:
+    branches: [ main ]
+    paths:
+      - identifiers.json
+      - wikidata.jsonld
+      - schema/**
+      - tools/**
+      - .github/workflows/validate_identifiers.yml
+  schedule:
+    - cron: "17 3 * * 1"  # Mondays 03:17 UTC (weekly)
+  workflow_dispatch:
+
+concurrency:
+  group: validate-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
 
 jobs:
   validate:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
 
-      - name: Set up Python
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: ${{ matrix.python-version }}
+          cache: pip
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install jsonschema pyyaml
 
+      - name: JSON sanity checks (identifiers.json, wikidata.jsonld)
+        run: |
+          jq . identifiers.json > /dev/null
+          jq . wikidata.jsonld > /dev/null
+
       - name: Run validator
         run: |
-          python tools/validate_identifiers.py --wikidata wikidata.jsonld --ids identifiers.json --schema schema/manifest-schema.json
+          python tools/validate_identifiers.py \
+            --wikidata wikidata.jsonld \
+            --ids identifiers.json \
+            --schema schema/manifest-schema.json
